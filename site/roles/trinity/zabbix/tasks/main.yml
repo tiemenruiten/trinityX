@@ -13,11 +13,24 @@
                           '/etc/trinity/passwords/mysql/zabbix.txt
                            chars=ascii_letters,digits,hexdigits') }}"
 
+- name: Enable Remi PHP {{ zabbix_php_version }} repo
+  ini_file:
+    path: /etc/yum.repos.d/remi-php{{ zabbix_php_version }}.repo
+    section: remi-php{{ zabbix_php_version }}
+    option: enabled
+    value: 1
+
 - name: Install Zabbix packages
   yum:
     name: '{{ zabbix_packages }}'
     state: present
   tags: install-only
+
+- name: Add nginx to apache group for PHP-FPM
+  user:
+    name: nginx
+    groups: apache
+    append: yes
 
 - name: Stop and disable httpd
   service:
@@ -258,7 +271,7 @@
 
   - name: Check for error
     fail:
-      msg: 'Error on previos step: {{ res.json.error }}'
+      msg: 'Error on previous step: {{ res.json.error }}'
     when: res.json.error is defined
 
 ###############################################################################
@@ -283,7 +296,7 @@
 
   - name: Check for error
     fail:
-      msg: 'Error on previos step: {{ res.json.error }}'
+      msg: 'Error on previous step: {{ res.json.error }}'
     when: res.json.error is defined
 
 ###############################################################################
@@ -334,7 +347,7 @@
 
   - name: Check for error
     fail:
-      msg: 'Error on previos step: {{ res.json.error }}'
+      msg: 'Error on previous step: {{ res.json.error }}'
     when:
       - res.skipped is not defined
       - res.json.error is defined
@@ -367,18 +380,22 @@
       body_format: json
       body: '{
             "jsonrpc": "2.0",
-            "method": "user.addmedia",
+            "method": "user.update",
+            "id": 1,
             "auth": "{{ zabbix_auth_token }}",
-            "id": 7,
             "params": {
-                "users": [{"userid": 1}],
-                "medias": {
-                    "mediatypeid": "{{ mediatype.json.result[0].mediatypeid }}",
-                    "sendto": "root@{{ trix_ctrl_hostname }}",
-                    "active": 0,
-                    "severity": 63,
-                    "period": "1-7,00:00-24:00"
-                }
+                "userid": "1",
+                "user_medias": [ 
+                    {
+                        "mediatypeid": "{{ mediatype.json.result[0].mediatypeid }}",
+                        "sendto": [ 
+                            "root@{{ trix_ctrl_hostname }}.{{ trix_domain }}"
+                        ],
+                        "active": 0,
+                        "severity": 63,
+                        "period": "1-7,00:00-24:00"
+                    }
+                ]
             }
         }'
     register: res

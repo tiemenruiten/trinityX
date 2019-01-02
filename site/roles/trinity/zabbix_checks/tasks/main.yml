@@ -124,7 +124,7 @@
       - { object: "hostgroup", action: "set", filter: { }, params: { name: "Login" } }
       - { object: "hostgroup", action: "set", filter: { }, params: { name: "Storage" } }
 
-  - name: "Create or update (HA) controller host"
+  - name: Create or update (HA) controller host
     local_action: 
       module: zabbix_host
       server_url: https://localhost/zabbix
