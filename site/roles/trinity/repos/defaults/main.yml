@@ -1,4 +1,11 @@
 ---
+trinity_repo: 'https://updates.clustervision.com/trinity/10.2/centos/trinity.repo'
+userspace_repo: 'https://updates.clustervision.com/userspace/userspace-release.x86_64.rpm'
+luna_repo: 'https://updates.clustervision.com/luna/1.2/centos/luna-1.2.repo'
+elrepo_repo: 'http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm'
+zabbix_repo: 'https://repo.zabbix.com/zabbix/4.0/rhel/7/x86_64/zabbix-release-4.0-1.el7.noarch.rpm'
+remi_repo: 'http://rpms.remirepo.net/enterprise/remi-release-7.rpm'
+
 repos:
   repo: ''
 

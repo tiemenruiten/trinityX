@@ -5,9 +5,7 @@ image_core_packages:
   - "grub2"
   - "grub2-tools"
   - "tzdata"
-  - "luna-client"
 
 image_repos:
-  - name: luna
-    repo: https://updates.clustervision.com/luna/1.2/centos/$releasever/$basearch
   - repo: /etc/yum.repos.d/CentOS-Base.repo
+  - repo: epel-release

@@ -1,8 +1,7 @@
 ---
 # vars file for cv_support
 
-packages_packages:
-  - epel-release
+packages_packages: ''
 
 tunables_packages:
   - OpenIPMI

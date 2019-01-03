@@ -15,10 +15,13 @@
   - role: trinity/repos
     repos:
     - repo: '{{ userspace_repo }}'
+    - repo: '{{ luna_repo }}'
     - repo: epel-release
     tags: repos
 
   - role: trinity/packages
+    packages_packages:
+    - luna-client
     tags: packages
 
   - role: trinity/tunables
