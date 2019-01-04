@@ -8,4 +8,4 @@ dependencies:
   - role: repos
     repos:
       - repo: "{{ zabbix_repo }}"
-      - repo: "{{ zabbix_php_repo }}"
+      - repo: "{{ remi_repo }}"
