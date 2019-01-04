@@ -173,6 +173,8 @@
       login_password: "{{ zabbix_admin_pwd }}"
       validate_certs: no
       template_name: "CV role {{ image_name | capitalize }}"
+      template_groups:
+        - Templates
      
   - name: Get ID's
     zabbix_conf:
