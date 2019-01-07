@@ -9,4 +9,4 @@ remi_repo: 'http://rpms.remirepo.net/enterprise/remi-release-7.rpm'
 repos:
   repo: ''
 
-trix_local_repo_baseurl: http://localhost/repos/trinityx/
+trix_local_repo_baseurl: 'http://{{ trix_ctrl_ip }}:{{ repos_port }}/repos/trinityx/'

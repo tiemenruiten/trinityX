@@ -151,4 +151,3 @@ additional_env_modules: []
 
 trix_local_reponame: 'trinityx-local'
 repos_port: 8080
-trix_local_repo_baseurl: 'http://{{ trix_ctrl_ip }}:{{ repos_port }}/repos/trinityx/'
