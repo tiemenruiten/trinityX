@@ -27,7 +27,7 @@ The OpenStack optional module adds another network requirement:
 - a third Ethernet NIC used for the traffic between OpenStack VMs.
 
 
-The controllers must have enough disk space to install the base operating system, as well as all the packages required by TrinityX. For a simple installation this amounts to a few gigabytes only. Other components of Trinity will likely require much more space, namely:
+The controllers must have enough disk space to install the base operating system, as well as all the packages required by TrinityX. For a simple installation this amounts to a few gigabytes only. Other components of TrinityX will likely require much more space, namely:
 
 - compute images;
 
@@ -98,4 +98,3 @@ Compute nodes
 ~~~~~~~~~~~~~
 
 The compute nodes must be configured to PXE-boot from the NIC connected to the internal network.
-

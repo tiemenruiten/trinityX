@@ -21,7 +21,7 @@ Ansible Roles overview
 - ssl-cert: generates SSL certs for HTTPS and LDAPS
 - openldap: installs OpenLDAP and configures schema
 - obol: installs and configures obol (user management tool)
-- sssd: installs, configures, and enables sssd
+- sssd: installs, configures, and enables SSSD
 - mariadb: installs, configures MariaDB (MySQL), adds resources to pacemaker
 - slurm: installs and configures Slurm, adds resources to pacemaker
 - mongodb: installs and configures MongoDB, DB for luna
@@ -33,4 +33,4 @@ Ansible Roles overview
 - zabbix_agent: installs Zabbix agent on controllers and images
 - zabbix_checks: installs additional check scripts and configures templates on Zabbix server
 - trix-status: installs trix-status - tool for getting TrinityX cluster overview
-- docker-registry: installs and configures docker registry
+- docker-registry: installs and configures Docker Registry

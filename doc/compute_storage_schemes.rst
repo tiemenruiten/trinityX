@@ -89,5 +89,3 @@ Do note that for the above to work, some changes need to be made to the osimage:
 
 Software RAID1 scheme
 ---------------------
-
-

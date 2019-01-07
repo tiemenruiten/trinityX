@@ -55,29 +55,29 @@ When running this playbook for the first time, you will see initial warnings tha
     "/etc/ansible/hosts/luna", line 3, in <module>     from luna_ansible.inventory import LunaInventory
     File "/usr/lib/python2.7/site-packages/luna_ansible/inventory.py", line 15, in <module>     raise
     AnsibleError("luna is not installed") ansible.errors.AnsibleError: luna is not installed
-    
+
     [...]
 
 
 The rest of the output would be a list of all the tasks that Ansible is running on controller(s)::
 
-    [...] 
+    [...]
 
     TASK [trinity/init : Update the trix_ctrl_* variables in case of non-HA setup] **************************
     ok: [controller]
-    
+
     TASK [trinity/init : Toggle selinux state] **************************************************************
      [WARNING]: SELinux state temporarily changed from 'enforcing' to 'permissive'. State change will take
     effect next reboot.
-    
+
     changed: [controller]
-    
-    [...] 
-    
+
+    [...]
+
     TASK [trinity/repos : Ensure "/trinity/repos" exists] ***************************************************
     changed: [controller]
-    
-    [...] 
+
+    [...]
 
 
 Then at the end, if everything was successful, you will be able to see a summary of all the actions that Ansible has performed, including how many changes and how many failures::
@@ -127,4 +127,3 @@ By default ``compute.yml`` applies to the host `compute.osimages.luna` which mea
     - "osimages.luna" which will cover all osimages defined in Luna.
     - "nodes.luna" which will cover all nodes defined in Luna.
     - "node001.nodes.luna" which will only cover node001 as is defined in Luna.
-

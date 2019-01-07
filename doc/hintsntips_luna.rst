@@ -54,7 +54,7 @@ To speed up creation time, it is possible to disable packing of the image. This 
 Modifying images and packing them
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-There are two approaches to creating new images in TrinityX: manually and via Ansible. The same is true for modifying images. 
+There are two approaches to creating new images in TrinityX: manually and via Ansible. The same is true for modifying images.
 
 In the manual approach, first clone the image with ``luna osimage clone`` and modify as a regular set of files or in chrooted environment.
 
@@ -311,30 +311,30 @@ It should list something like::
 
     .1.3.6.1.2.1.17.7.1.2.2.1.2.1.24.102.218.96.27.201 = INTEGER: 210
 
-The last 6 numbers is a MAC address in decimal format. See ``man luna`` for more information on how to decrypt it.
+The last 6 numbers form a MAC address in decimal format. See ``man luna`` for more information on how to decrypt it.
 
 When Luna is able to get MAC addresses from switches, it will display them in ``luna cluster listmacs``.
 
 Other devices present as ``otherdev`` in Luna. This class of configurable items will fill DNS records. For example, it is handy to resolve PDUs' hostnames.
 
-The last item worthy of mention is ``bmcsetup``. It describes the IPMI/BMC settings for nodes: credentials and IPMI control channels.
+The last item worth mentioning is ``bmcsetup``. It describes the IPMI/BMC settings for nodes: credentials and IPMI control channels.
 
 Node management
 ~~~~~~~~~~~~~~~
 
-As said, most of the tunables for nodes should be performed on a group level. However, several items need to be managed individually for each node. These are IP addresses, MAC address, and switch/port pair.
+As said, most of the tunables for nodes should be performed on the group level. However, several items need to be managed individually for each node. These are IP addresses, MAC address, and switch/port pair.
 
-The MAC address is considered a unique identifier of the node. If not configured manually, it will be acquired based on the switch and port configuration. Another way of setting up the MAC address is to choose node name from the list during boot. If the MAC address is not known for the node, it will be looping in the boot menu.
+The MAC address is considered a unique identifier of the node. If not configured manually, it will be acquired based on the switch and port configuration. Another way of setting up the MAC address is to choose the node name from the list during boot. If the MAC address is not known for the node, it will be looping in the boot menu.
 
-IP address for a node is always configured from the network defined in the corresponding group. IP is always assigned on the interface if the network is configured for this interface on the group level and Luna controls this rule.
+The IP address for a node is always configured from the network defined in the corresponding group. The IP is always assigned on the interface if the network is configured for this interface on the group level and Luna controls this rule.
 
 It is possible to change the group for a node and Luna does its best to preserve configured IP addresses. It can be tricky as the set of interfaces on the destination group might be different from that of the source group.
 
-Further individual settings for node are ``--setupbmc`` and ``--service``. These are mostly relevant for debugging. The first allows disabling of attempts to configure BMC, as it is known this configuration might be flaky. ``--service`` tunable can be handy if an engineer needs to debug boot issues. Nodes in this mode will not try to run the install script, but will stay in the initrd stage, configure 2 consoles (Alt+F1, Alt+F2), and try to set up IP addresses and run ssh daemon. In addition, it can be used to inspect the hardware configuration of the node before setup and wiping of data on disks.
+Further individual settings for node are ``--setupbmc`` and ``--service``. These are mostly relevant for debugging. The first allows disabling of attempts to configure the BMC, as it is known this configuration might be flaky. ``--service`` tunable can be handy if an engineer needs to debug boot issues. Nodes in this mode will not try to run the install script, but will stay in the initrd stage, configure 2 consoles (Alt+F1, Alt+F2), try to set up IP addresses and run an ssh daemon. In addition, it can be used to inspect the hardware configuration of the node before setup and wiping data on disks.
 
-Another debug feature is a flag ``luna node show --script`` which accepts two options: ``boot`` and ``install``.
+Another debug feature is the flag ``luna node show --script`` which accepts two options: ``boot`` and ``install``.
 
-- ``--script boot`` shows the exact boot options node will use to fetch and run kernel and initrd.
+- ``--script boot`` shows the exact boot options the node will use to fetch and run the kernel and initrd.
 
 - ``--script install`` provides a way to inspect the script that will be used to install the node. Combined with ``--service yes`` it is a good way to catch mistakes like unpaired parentheses or quotes in pre/part/post scripts.
 

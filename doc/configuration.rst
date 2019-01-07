@@ -40,7 +40,7 @@ What follows is a list of those variables together with their descriptions and d
      - String
      - 000000
      - Project ID or string that'll show up in the default shell prompt on the controllers.
-       A pure esthetical configuration option that gives to shell prompts of the format `000000 hh:mm:ss [root@hostname ~]#`
+       A purely esthetical configuration option that configures shell prompts of the format `000000 hh:mm:ss [root@hostname ~]#`
 
    * - ha
      - Boolean
@@ -198,38 +198,13 @@ What follows is a list of those variables together with their descriptions and d
      - 'trinityx-local'
      - Name of the local repository in the case of offline installation
 
-   * - trinityx_local_repo_baseurl
-     - URL
-     - http://`trix_ctrl_ip`:`repos_port`/repos/trinityx/
-     - URL to be used to access local repository
-
-   * - luna_repo
-     - URL
-     - https://updates.clustervision.com/luna/1.2/centos/luna-1.2.repo
-     - URL of the luna repository
-
-   * - trinity_repo
-     - URL
-     - https://updates.clustervision.com/trinity/10.2/centos/trinity.repo
-     - URL of the trinity repository
-
-   * - userspace_repo
-     - URL
-     - https://updates.clustervision.com/userspace/userspace-release.x86_64.rpm
-     - URL of the repository of the userspace packages
-
-   * - elrepo_repo
-     - URL
-     - http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm
-     - URL of elrepo repository
-
 
 Role specific variables
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Below is a list of options that each ansible role in TrinityX supports.
+Below is a list of options that each Ansible role in TrinityX supports.
 
-The default values for each variable are set in `site/controller.yml`. For the sake of simplicity, not all variables appear in that file. You can find those missing variables and their defaults in the ansible role itself, in defaults directory (`site/roles/trinity/*/defaults/main.yml`).
+The default values for each variable are set in `site/controller.yml`. For the sake of simplicity, not all variables appear in that file. You can find those missing variables and their defaults in the Ansible role itself, in the defaults directory (`site/roles/trinity/*/defaults/main.yml`).
 
 
 `bind` role
@@ -241,7 +216,7 @@ The default values for each variable are set in `site/controller.yml`. For the s
 bind_dns_forwarders   List          - '8.8.8.8'            A list of the default DNS forwarders to use on the controllers.
                                     - '8.8.4.4'
 bind_dnssec_enable    Boolean       no                     Whether to enable DNSSEC in Bind9 on the controllers or not.
-bind_db_path          Path          `trix_local`/var/named The default path where Bind9 will store is DNS database.
+bind_db_path          Path          `trix_local`/var/named The default path where Bind9 will store its DNS database.
 
 resolv_server         IP address    127.0.0.1              Default nameserver to use in /etc/resolv.conf
 resolv_search_domains String        cluster ipmi           Default search domains to use in /etc/resolv.conf
@@ -268,8 +243,8 @@ chrony_allow_networks   List          []                        A list of networ
 ========================= ============= ===================== =============
      Variable                 Value        Default             Description
 ========================= ============= ===================== =============
-drbd_ctrl1_ip             IP address    `trix_ctrl1_ip`       IP address of the first of controllers in an HA setup.
-drbd_ctrl2_ip             IP address    `trix_ctrl2_ip`       IP address of the second of controllers in an HA setup.
+drbd_ctrl1_ip             IP address    `trix_ctrl1_ip`       IP address of the first controller in an HA setup.
+drbd_ctrl2_ip             IP address    `trix_ctrl2_ip`       IP address of the second controller in an HA setup.
 drbd_ctrl1_device         Path          /dev/drbd1            The name that will be given to the block device node of the DRBD resource on the first controller in an HA setup.
 drbd_ctrl2_device         Path          `drbd_ctrl1_device`   The name that will be given to the block device node of the DRBD resource on the second controller in an HA setup.
 drbd_ctrl1_disk           Disk name     `shared_fs_device`    A path to the device that will be used as backend for the DRBD resource on the first controller in an HA setup.
@@ -393,7 +368,7 @@ mongo_db_path       Path          `trix_local`/var/lib/mongodb Path where MongoD
 =================== ============= ========================== =============
 nfs_rpccount        Number        256                        Number of NFS server processes to be started on the controller(s).
 nfs_enable_rdma     Boolean       false                      Whether to enable NFS over RDMA by default or not.
-                                                             TCP will be used when this option if set to `false`.
+                                                             TCP will be used when this option is set to `false`.
 nfs_export_shared   Boolean       true                       If set to true, `trix_shared` directory will be exported to the compute nodes from the controller(s).
 nfs_export_home     Boolean       true                       If set to true, `trix_home` directory will be exported to the compute nodes from the controller(s).
 nfs_exports_path    Path          `trix_local`/etc/exports.d The path where to store NFS exports configuration on the controller(s).
@@ -407,7 +382,7 @@ nfs_exports_path    Path          `trix_local`/etc/exports.d The path where to s
 =================== ============= ================================== =============
 obol_conf_path      Path          /etc                               Path where obol's configuration file will be stored on the controller(s).
 users_home_path     Path          `trix_home`                        Default home directory path to use for users created using obol.
-ldap_host           FQDN          `trix_ctrl_hostname.trix_domain`   The FQDN of the ldap servers used to store ldap accounts on the cluster.
+ldap_host           FQDN          `trix_ctrl_hostname.trix_domain`   The FQDN of the LDAP servers used to store LDAP accounts on the cluster.
 =================== ============= ================================== =============
 
 `openldap` role
@@ -456,12 +431,19 @@ fence_ipmilan_passwd        String        'password'                Password (if
 `repos` role
 ^^^^^^^^^^^^^
 
-=================== ============= ============== =============
-     Variable           Value        Default      Description
-=================== ============= ============== =============
-repos               List                         List of package repositories to install.
-repos_port          Number        8080           Default port to listen on when serving the local package repository on the controller(s).
-=================== ============= ============== =============
+======================== ============= ====================================================================================== =============
+     Variable                Value        Default                                                                             Description
+======================== ============= ====================================================================================== =============
+repos                    List                                                                                                 List of package repositories to install.
+repos_port               Number        8080                                                                                   Default port to listen on when serving the local package repository on the controller(s).
+trinity_repo             String        https://updates.clustervision.com/trinity/10.2/centos/trinity.repo                     TrinityX repository
+userspace_repo           String        https://updates.clustervision.com/userspace/userspace-release.x86_64.rpm               CV Userspace repository
+luna_repo:               String        https://updates.clustervision.com/luna/1.2/centos/luna-1.2.repo                        Luna repository
+elrepo_repo:             String        http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm                       ELRepo repository
+zabbix_repo              String        https://repo.zabbix.com/zabbix/4.0/rhel/7/x86_64/zabbix-release-4.0-1.el7.noarch.rpm   Zabbix repository
+remi_repo:               String        http://rpms.remirepo.net/enterprise/remi-release-7.rpm                                 Remi PHP repository
+trix_local_repo_baseurl  String        http://{{ trix_ctrl_ip }}:{{ repos_port }}/repos/trinityx/                             TrinityX repo URL when doing local install
+======================== ============= ====================================================================================== =============
 
 `rsyslog` role
 ^^^^^^^^^^^^^^^
@@ -502,26 +484,26 @@ syslog_file_template_rules.0.rule     String        '{{ trix_cluster_net.split("
 =================== ============= =========================================== =============
      Variable           Value        Default                                   Description
 =================== ============= =========================================== =============
-slurm_conf_path     String        `trix_shared`/etc/slurm                     Path where slurm configuration files are stored.
-slurm_spool_path    Path          `trix_local`/var/spool/slurm                Path for slurm's working data.
-slurm_log_path      Path          /var/log/slurm                              Location where to store slurm logs.
+slurm_conf_path     String        `trix_shared`/etc/slurm                     Path where Slurm configuration files are stored.
+slurm_spool_path    Path          `trix_local`/var/spool/slurm                Path for Slurm's working data.
+slurm_log_path      Path          /var/log/slurm                              Location where to store Slurm logs.
 
-slurm_user_id       Number        891                                         slurm's user ID
-slurm_group_id      Number        891                                         slurm's group ID
+slurm_user_id       Number        891                                         Slurm's user ID
+slurm_group_id      Number        891                                         Slurm's group ID
 
-slurm_ctrl          Hostname      `trix_ctrl_hostname`                        Hostname of the slurm controller
-slurm_ctrl_ip       IP address    `trix_ctrl_ip`                              IP address of the slurm controller
-slurm_ctrl_list     Hostname list `trix_ctrl1_hostname,trix_ctrl2_hostname`   Comma separated list of the machines that serve as slurm controller.
+slurm_ctrl          Hostname      `trix_ctrl_hostname`                        Hostname of the Slurm controller
+slurm_ctrl_ip       IP address    `trix_ctrl_ip`                              IP address of the Slurm controller
+slurm_ctrl_list     Hostname list `trix_ctrl1_hostname,trix_ctrl2_hostname`   Comma separated list of the machines that serve as Slurm controller.
 
-enable_slurm_pam    Boolean       true                                        Enable or disable slurm's PAM module that denies user access to nodes where they don't have a running job.
+enable_slurm_pam    Boolean       true                                        Enable or disable Slurm's PAM module that denies user access to nodes where they don't have a running job.
 
 slurmdbd_sql_user   String        'slurm_accounting'                          Name to use for slurmdbs's SQL user.
 slurmdbd_sql_db     String        'slurm_accounting'                          Name to use for slurmdbd's database.
 
-munge_user_id       Number        892                                         munge's user ID
-munge_group_id      Number        892                                         munge's group ID
+munge_user_id       Number        892                                         MUNGE's user ID
+munge_group_id      Number        892                                         MUNGE's group ID
 
-munge_conf_path     Path          `trix_shared`/etc/munge                     Path where munge's configuration files will be stored.
+munge_conf_path     Path          `trix_shared`/etc/munge                     Path where MUNGE's configuration files will be stored.
 
 =================== ============= =========================================== =============
 
@@ -557,7 +539,7 @@ ssl_cert_group_id     Number        991                                Default g
 =================== ============= ==================================== =============
 sss_allowed_groups  List          - admins                             List of user groups that are allowed access on the controller(s).
 
-sss_ldap_hosts      List          - `trix_ctrl_hostname.trix_domain`   List of hostnames that sssd can use for its ldap queries.
+sss_ldap_hosts      List          - `trix_ctrl_hostname.trix_domain`   List of hostnames that SSSD can use for its ldap queries.
 
 sss_filter_enabled  Boolean       false                                Whether to use group based access filters on restrict access to compute nodes or not.
 
@@ -576,8 +558,6 @@ zabbix_sql_user         String        'zabbix'                                  
 zabbix_login            String        'Admin'                                                                                 Default name of the zabbix admin user
 
 zabbix_mail_server      Hostname      'localhost'                                                                             Default mail server
-zabbix_repo             String        'https://repo.zabbix.com/zabbix/4.0/rhel/7/x86_64/zabbix-release-4.0-1.el7.noarch.rpm'  Default Zabbix repository
-zabbix_php_repo:        String        'http://rpms.remirepo.net/enterprise/remi-release-7.rpm'                                Default Zabbix PHP repository
 zabbix_php_version:     String        '73'                                                                                    Default Zabbix PHP version
 
 ======================= ============= ============================ =============
@@ -610,4 +590,3 @@ nfs_mounts.0.remote  Path          controller:/trinity/shared        NFS share t
 nfs_mounts.0.options String        'defaults,nfsvers=4,ro,retrans=4' Mount point options
 
 ==================== ============= ================================= =============
-

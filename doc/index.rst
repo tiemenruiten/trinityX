@@ -1,5 +1,5 @@
 
-Trinity X
+TrinityX
 =========
 
 Introduction

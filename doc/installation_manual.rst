@@ -5,7 +5,7 @@ Installation manual
 
 .. toctree::
    :maxdepth: 1
-   
+
    requirements.rst
    ha_design.rst
    installation.rst
